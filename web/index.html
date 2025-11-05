@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Maze Solver</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧠 AI-Powered Maze Solver</h1>
+            <p>Compare classical pathfinding algorithms with AI techniques</p>
+        </header>
+
+        <div class="controls-panel">
+            <div class="control-group">
+                <h3>Maze Settings</h3>
+                <div class="input-row">
+                    <label>Rows: <input type="number" id="rows" value="15" min="5" max="50"></label>
+                    <label>Columns: <input type="number" id="cols" value="20" min="5" max="50"></label>
+                </div>
+                <div class="input-row">
+                    <label>Wall Probability: <input type="range" id="wallProb" min="0" max="50" value="25">
+                        <span id="wallProbValue">0.25</span>
+                    </label>
+                </div>
+                <div class="button-row">
+                    <button onclick="generateMaze()">🔄 Generate Random Maze</button>
+                    <button onclick="generatePerfectMaze()">🌳 Generate Perfect Maze</button>
+                    <button onclick="clearMaze()">🧹 Clear Maze</button>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <h3>Algorithm Selection</h3>
+                <div class="algorithm-buttons">
+                    <button onclick="runAlgorithm('dfs')" class="algo-btn">DFS</button>
+                    <button onclick="runAlgorithm('bfs')" class="algo-btn">BFS</button>
+                    <button onclick="runAlgorithm('dijkstra')" class="algo-btn">Dijkstra</button>
+                    <button onclick="runAlgorithm('astar-manhattan')" class="algo-btn">A* (Manhattan)</button>
+                    <button onclick="runAlgorithm('astar-euclidean')" class="algo-btn">A* (Euclidean)</button>
+                    <button onclick="runAlgorithm('greedy')" class="algo-btn">Greedy</button>
+                    <button onclick="runAlgorithm('bidirectional')" class="algo-btn">Bidirectional</button>
+                    <button onclick="runAllAlgorithms()" class="algo-btn compare-btn">🔥 Compare All</button>
+                </div>
+                <div class="speed-control">
+                    <label>Animation Speed: <input type="range" id="speed" min="1" max="100" value="50">
+                        <span id="speedValue">50 ms</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <h3>Edit Mode</h3>
+                <div class="edit-buttons">
+                    <button onclick="setEditMode('wall')" id="wallBtn" class="edit-btn">🧱 Add Walls</button>
+                    <button onclick="setEditMode('erase')" id="eraseBtn" class="edit-btn">🧽 Erase</button>
+                    <button onclick="setEditMode('start')" id="startBtn" class="edit-btn">🟢 Set Start</button>
+                    <button onclick="setEditMode('end')" id="endBtn" class="edit-btn">🔴 Set End</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="canvas-container">
+                <canvas id="mazeCanvas"></canvas>
+            </div>
+
+            <div class="metrics-panel">
+                <h3>📊 Performance Metrics</h3>
+                <div id="metrics" class="metrics-content">
+                    <p class="placeholder">Run an algorithm to see metrics...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="comparison-panel" id="comparisonPanel" style="display: none;">
+            <h3>🏆 Algorithm Comparison</h3>
+            <canvas id="comparisonChart"></canvas>
+            <div id="comparisonTable"></div>
+        </div>
+
+        <footer>
+            <p>💡 Click on the maze to edit | Drag to draw walls | Compare algorithms in real-time</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="maze.js"></script>
+    <script src="algorithms.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

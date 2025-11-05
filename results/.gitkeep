@@ -1,0 +1,14 @@
+# Results Directory
+
+This directory contains generated output from the maze solver:
+
+- **comparison_charts.png**: Algorithm performance comparison charts
+- **radar_chart.png**: Multi-dimensional performance radar chart
+- **metrics.json**: Performance metrics in JSON format
+- **metrics.csv**: Performance metrics in CSV format
+
+Files in this directory are auto-generated when running:
+- `python main.py --console`
+- `python demo.py`
+
+These files are ignored by git (see .gitignore).
