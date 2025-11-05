@@ -316,43 +316,36 @@ function displayComparison() {
     
     // Create chart
     const chartCanvas = document.getElementById('comparisonChart');
-    const chartCtx = chartCanvas.getContext('2d');
+    chartCanvas.width = chartCanvas.offsetWidth;
+    chartCanvas.height = 300;
     
     if (window.comparisonChart) {
         window.comparisonChart.destroy();
     }
     
-    window.comparisonChart = new Chart(chartCtx, {
-        type: 'bar',
-        data: {
-            labels: allResults.map(r => r.name),
-            datasets: [
-                {
-                    label: 'Nodes Explored',
-                    data: allResults.map(r => r.nodesExplored),
-                    backgroundColor: 'rgba(102, 126, 234, 0.6)',
-                    borderColor: 'rgba(102, 126, 234, 1)',
-                    borderWidth: 2
-                },
-                {
-                    label: 'Path Length',
-                    data: allResults.map(r => r.path ? r.path.length : 0),
-                    backgroundColor: 'rgba(243, 156, 18, 0.6)',
-                    borderColor: 'rgba(243, 156, 18, 1)',
-                    borderWidth: 2
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
+    window.comparisonChart = new SimpleChart(chartCanvas, {
+        labels: allResults.map(r => r.name),
+        datasets: [
+            {
+                label: 'Nodes Explored',
+                data: allResults.map(r => r.nodesExplored),
+                backgroundColor: 'rgba(102, 126, 234, 0.6)',
+                borderColor: 'rgba(102, 126, 234, 1)',
+                borderWidth: 2
+            },
+            {
+                label: 'Path Length',
+                data: allResults.map(r => r.path ? r.path.length : 0),
+                backgroundColor: 'rgba(243, 156, 18, 0.6)',
+                borderColor: 'rgba(243, 156, 18, 1)',
+                borderWidth: 2
             }
-        }
+        ]
+    }, {
+        title: 'Algorithm Performance Comparison'
     });
+    
+    window.comparisonChart.drawBarChart();
     
     // Create table
     const optimalPathLength = Math.min(...allResults.filter(r => r.optimal && r.path).map(r => r.path.length));
